@@ -37,10 +37,41 @@ function chooseExpenses() {
 
 chooseExpenses();
 
-appData.moneyPerDay = (appData.budjet / 30).toFixed() ; //toFixed преобразует в строку
+function chooseOptExpenses() {
+    for (let i = 1; i < 4; i++) {
+        let a = prompt("Введите необязательную статью расходов в этом месяце");
+          
+        if ((a != '' ) && (typeof(a) != null) && (typeof(a) === 'string') && (a.length < 50)) {
+            appData.OptionalExpenses[i] = a;
+        } else {
+            i--;
+        } 
+    }
+}
+
+chooseOptExpenses();
 
 
-console.log(money, time, appData);
+function detectDayBudget() {
+    appData.moneyPerDay = (appData.budjet / 30).toFixed() ; //toFixed преобразует в строку
+}
+
+detectDayBudget();
+
+function detectLevel() {
+    if (appData.moneyPerDay < 100) {
+        alert('Низкий уровень достатка');
+    } else if ((appData.moneyPerDay >= 100) && (appData.moneyPerDay < 1000)) {
+        alert('Средний уровень достатка');
+    } else if (appData.moneyPerDay >= 1000) {
+        alert('Высокий уровень достатка');
+    } else {
+        alert('Произошла ошибка!');
+    }
+}
+
+detectLevel();
+
 
 function checkSavings() {
     if (appData.savings == true) {
@@ -52,3 +83,5 @@ function checkSavings() {
 }
 
 checkSavings();
+
+console.log(money, time, appData);
